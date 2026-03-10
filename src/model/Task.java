@@ -12,6 +12,15 @@ public class Task {
         this.deadline = deadline;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", processingTime=" + processingTime +
+                ", deadline=" + deadline +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
