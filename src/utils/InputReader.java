@@ -12,34 +12,38 @@ public class InputReader {
 
     private static final String FOLDER = "instances/";
 
-    public static List<Task> read(String fileName) {
+    public static List<List<Task>> read(String fileName) {
 
-        List<Task> tasks = new ArrayList<>();
+        List<List<Task>> instances = new ArrayList<>();
 
         String path = FOLDER + fileName;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
 
-            // lê o número de tarefas (primeira linha do arquivo)
-            int numberOfTasks = Integer.parseInt(reader.readLine());
+            int numberOfInstances = Integer.parseInt(reader.readLine());
 
-            // lê cada tarefa do arquivo
-            for (int i = 0; i < numberOfTasks; i++) {
+            for (int k = 0; k < numberOfInstances; k++) {
 
-                String line = reader.readLine();
+                int numberOfTasks = Integer.parseInt(reader.readLine());
 
-                // separa os valores da linha
-                String[] parts = line.split(" ");
+                List<Task> tasks = new ArrayList<>();
 
-                int id = Integer.parseInt(parts[0]);
-                int processingTime = Integer.parseInt(parts[1]);
-                int deadline = Integer.parseInt(parts[2]);
+                for (int i = 0; i < numberOfTasks; i++) {
 
-                // cria o objeto Task
-                Task task = new Task(id, processingTime, deadline);
+                    String line = reader.readLine();
+                    String[] parts = line.split(" ");
 
-                // adiciona na lista
-                tasks.add(task);
+                    int id = Integer.parseInt(parts[0]);
+                    int processingTime = Integer.parseInt(parts[1]);
+                    int deadline = Integer.parseInt(parts[2]);
+
+                    Task task = new Task(id, processingTime, deadline);
+                    tasks.add(task);
+                }
+
+                instances.add(tasks);
+
+                reader.readLine(); // pula linha em branco
             }
 
         } catch (IOException e) {
@@ -47,6 +51,6 @@ public class InputReader {
             e.printStackTrace();
         }
 
-        return tasks;
+        return instances;
     }
 }
