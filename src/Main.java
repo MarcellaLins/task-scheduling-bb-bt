@@ -8,21 +8,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // gera arquivos de entrada
-        InputGenerator.generate("input5.txt", 5);
-        InputGenerator.generate("input10.txt", 10);
-        InputGenerator.generate("input15.txt", 15);
-        InputGenerator.generate("input20.txt", 20);
-        InputGenerator.generate("input25.txt", 25);
+        // gera arquivo de entrada com várias instâncias
+        int[] sizes = {5, 10, 15, 20, 25};
+        InputGenerator.generate("input.txt", sizes);
 
-        // lê uma instância para testar
-        List<Task> tasks = InputReader.read("input10.txt");
+        // lê todas as instâncias
+        List<List<Task>> instances = InputReader.read("input.txt");
 
-        // imprime as tarefas lidas
-        System.out.println("Tarefas lidas do arquivo:");
+        System.out.println("Instâncias lidas do arquivo:\n");
 
-        for (Task task : tasks) {
-            System.out.println(task);
+        int instanceNumber = 1;
+
+        for (List<Task> tasks : instances) {
+
+            System.out.println("Instância " + instanceNumber);
+
+            for (Task task : tasks) {
+                System.out.println(task);
+            }
+
+            System.out.println();
+            instanceNumber++;
         }
     }
 }
