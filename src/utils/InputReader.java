@@ -1,12 +1,11 @@
 package utils;
 
-import model.Task;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Task;
 
 public class InputReader {
 
@@ -34,9 +33,10 @@ public class InputReader {
                 int id = Integer.parseInt(parts[0]);
                 int processingTime = Integer.parseInt(parts[1]);
                 int deadline = Integer.parseInt(parts[2]);
+                int value = Integer.parseInt(parts[3]);
 
                 // cria o objeto Task
-                Task task = new Task(id, processingTime, deadline);
+                Task task = new Task(id, processingTime, deadline, value);
 
                 // adiciona na lista
                 tasks.add(task);

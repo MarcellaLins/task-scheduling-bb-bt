@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Solution {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
     private int cost;
 
     public Solution(List<Task> tasks, int cost) {

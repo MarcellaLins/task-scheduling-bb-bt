@@ -29,10 +29,11 @@ public class InputGenerator {
 
             for (int i = 1; i <= numberOfTasks; i++) {
 
-                int processingTime = random.nextInt(10) + 1; // gerar valores entre 1 e 10
-                int deadline = random.nextInt(30) + 5; // gerar valores entre 5 e 34
+                int processingTime = random.nextInt(10) + 1;
+                int deadline = random.nextInt(30) + 5;
+                int value = random.nextInt(100) + 1;
 
-                writer.write(i + " " + processingTime + " " + deadline + "\n");
+                writer.write(i + " " + processingTime + " " + deadline + " " + value + "\n");
             }
 
             System.out.println("Arquivo criado em: " + file.getAbsolutePath());

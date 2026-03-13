@@ -2,14 +2,16 @@ package model;
 
 public class Task {
 
-    private int id;
-    private int processingTime;
-    private int deadline;
+    private final int id;
+    private final int processingTime;
+    private final int deadline;
+    private final int value;
 
-    public Task(int id, int processingTime, int deadline) {
+    public Task(int id, int processingTime, int deadline, int value) {
         this.id = id;
         this.processingTime = processingTime;
         this.deadline = deadline;
+        this.value = value;
     }
 
     @Override
@@ -31,6 +33,10 @@ public class Task {
 
     public int getDeadline() {
         return deadline;
+    }
+
+    public int getValue() {
+        return value;
     }
 
 }
