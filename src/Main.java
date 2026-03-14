@@ -1,8 +1,9 @@
+import algorithms.Backtracking;
+import java.util.List;
+import model.Solution;
+import model.Task;
 import utils.InputGenerator;
 import utils.InputReader;
-import model.Task;
-
-import java.util.List;
 
 public class Main {
 
@@ -21,8 +22,38 @@ public class Main {
         // imprime as tarefas lidas
         System.out.println("Tarefas lidas do arquivo:");
 
+<<<<<<< Updated upstream
         for (Task task : tasks) {
             System.out.println(task);
+=======
+        int instanceNumber = 1;
+
+        for (List<Task> tasks : instances) {
+
+            System.out.println("Instância " + instanceNumber);
+
+            for (Task task : tasks) {
+                System.out.println(task);
+            }
+
+            Backtracking backtracking = new Backtracking();
+            Solution solution = backtracking.solve(tasks);
+
+            System.out.println("\nMelhor solução encontrada:");
+            System.out.println("Lucro total: " + solution.getCost());
+            System.out.println("Quantidade de tarefas: " + solution.getTasks().size());
+            System.out.print("Tarefas escolhidas: ");
+
+            for (Task task : solution.getTasks()) {
+                System.out.print(task.getId() + " ");
+            }
+
+            System.out.println();
+            System.out.println("Nós explorados: " + backtracking.getNodesExplored());
+            System.out.println();
+
+            instanceNumber++;
+>>>>>>> Stashed changes
         }
     }
 }
