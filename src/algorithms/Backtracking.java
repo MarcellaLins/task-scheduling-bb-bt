@@ -37,7 +37,7 @@ public class Backtracking {
     private void backtrack(List<Task> tasks, int index, int currentTime, int currentValue, List<Task> currentTasks) {
         nodesExplored++;
 
-        // caso base
+        // caso base (alcançou o fim da lista de tasks)
         if (index == tasks.size()) {
             if (currentValue > bestValue) {
                 bestValue = currentValue;
@@ -48,24 +48,19 @@ public class Backtracking {
 
         Task task = tasks.get(index);
 
-        // opção 1: não incluir a tarefa
-        backtrack(tasks, index + 1, currentTime, currentValue, currentTasks);
-
-        // opção 2: incluir a tarefa, se respeitar o deadline
+        // opção 1: incluir a tarefa, se respeitar o deadline
         if (currentTime + task.getProcessingTime() <= task.getDeadline()) {
             currentTasks.add(task);
 
-            backtrack(
-                    tasks,
-                    index + 1,
-                    currentTime + task.getProcessingTime(),
-                    currentValue + task.getValue(),
-                    currentTasks
-            );
+            // aumenta o currentTime e currentValue
+            backtrack(tasks, index + 1, currentTime + task.getProcessingTime(), currentValue + task.getValue(), currentTasks);
 
             // desfaz a escolha
             currentTasks.remove(currentTasks.size() - 1);
         }
+
+        // opção 2: não incluir a tarefa
+        backtrack(tasks, index + 1, currentTime, currentValue, currentTasks);
     }
 
     public long getNodesExplored() {

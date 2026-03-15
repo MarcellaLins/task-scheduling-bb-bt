@@ -1,4 +1,5 @@
 import algorithms.Backtracking;
+import algorithms.BranchBound;
 import java.util.List;
 import model.Solution;
 import model.Task;
@@ -28,21 +29,42 @@ public class Main {
                 System.out.println(task);
             }
 
-            Backtracking backtracking = new Backtracking();
-            Solution solution = backtracking.solve(tasks);
+            // Backtracking:
 
-            System.out.println("\nMelhor solução encontrada:");
-            System.out.println("Lucro total: " + solution.getCost());
-            System.out.println("Quantidade de tarefas: " + solution.getTasks().size());
+            Backtracking backtracking = new Backtracking();
+            Solution backtrackingSolution = backtracking.solve(tasks);
+
+            System.out.println("\nBacktracking:");
+            System.out.println("Lucro total: " + backtrackingSolution.getCost());
+            System.out.println("Quantidade de tarefas: " + backtrackingSolution.getTasks().size());
             System.out.print("Tarefas escolhidas: ");
 
-            for (Task task : solution.getTasks()) {
+            for (Task task : backtrackingSolution.getTasks()) {
                 System.out.print(task.getId() + " ");
             }
 
             System.out.println();
             System.out.println("Nós explorados: " + backtracking.getNodesExplored());
             System.out.println();
+            
+
+            // BranchAndBounda:
+
+            BranchBound branchAndBound = new BranchBound();
+            Solution branchSolution = branchAndBound.solve(tasks);
+
+            System.out.println("Branch and Bound:");
+            System.out.println("Lucro total: " + branchSolution.getCost());
+            System.out.println("Quantidade de tarefas: " + branchSolution.getTasks().size());
+            System.out.print("Tarefas escolhidas: ");
+
+            for (Task task : branchSolution.getTasks()) {
+                System.out.print(task.getId() + " ");
+            }
+
+            System.out.println();
+            System.out.println("Nós explorados: " + branchAndBound.getNodesExplored());
+            System.out.println("\n-----------------------------------------\n");
 
             instanceNumber++;
         }
