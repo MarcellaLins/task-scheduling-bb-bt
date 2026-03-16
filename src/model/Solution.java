@@ -4,22 +4,24 @@ import java.util.List;
 public class Solution {
 
     private final List<Task> tasks;
-    private int cost;
+    private int value;
 
-    public Solution(List<Task> tasks, int cost) {
+    public Solution(List<Task> tasks, int value) {
         this.tasks = tasks;
-        this.cost = cost;
+        this.value = value;
     }
 
     public List<Task> getTasks() {
         return tasks;
     }
 
-    public int getCost() {
-        return cost;
+    public int getValue() {
+        return value;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setValue(int value) {
+        this.value = value;
     }
+
+
 }
