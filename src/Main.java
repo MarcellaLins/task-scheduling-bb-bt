@@ -5,6 +5,7 @@ import model.Task;
 import utils.InputGenerator;
 import utils.InputReader;
 import utils.ResultWriter;
+import utils.TimerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,24 @@ public class Main {
         List<Solution> backtrackingSolutions = new ArrayList<>();
         List<Solution> branchSolutions = new ArrayList<>();
 
-        for (List<Task> tasks : instances) {
+        for (int i = 0; i < instances.size(); i++) {
+            List<Task> tasks = instances.get(i);
 
-            Backtracking backtracking = new Backtracking();
-            Solution backSolution = backtracking.solve(tasks);
+            // Backtracking com medição de tempo
+            TimerUtils.TimedResult backResult = TimerUtils.measureAverage(() -> {
+                Backtracking bt = new Backtracking();
+                return bt.solve(tasks);
+            }, 15);
+            System.out.printf("Instancia %d - Backtracking: %.3f ms%n", i + 1, backResult.getAverageTimeMs());
+            backtrackingSolutions.add(backResult.getSolution());
 
-            BranchBound branchBound = new BranchBound();
-            Solution branchSolution = branchBound.solve(tasks);
-
-            backtrackingSolutions.add(backSolution);
-            branchSolutions.add(branchSolution);
+            // Branch & Bound com medição de tempo
+            TimerUtils.TimedResult bbResult = TimerUtils.measureAverage(() -> {
+                BranchBound bb = new BranchBound();
+                return bb.solve(tasks);
+            }, 15);
+            System.out.printf("Instancia %d - Branch & Bound: %.3f ms%n", i + 1, bbResult.getAverageTimeMs());
+            branchSolutions.add(bbResult.getSolution());
         }
 
         ResultWriter.write("output.txt", backtrackingSolutions, branchSolutions);
