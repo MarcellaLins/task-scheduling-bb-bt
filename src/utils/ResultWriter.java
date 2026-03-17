@@ -32,26 +32,24 @@ public class ResultWriter {
 
                 // Backtracking
                 Solution back = backtrackingSolutions.get(i);
-
                 writer.write("Backtracking\n");
                 writer.write(back.getValue() + "\n");
                 writer.write(back.getTasks().size() + "\n");
 
                 for (Task t : back.getTasks()) {
-                    writer.write(t.getId() + " ");
+                    writer.write(t.getValue() + " "); // apenas value
                 }
 
                 writer.write("\n\n");
 
                 // Branch and Bound
                 Solution bb = branchSolutions.get(i);
-
                 writer.write("BranchAndBound\n");
                 writer.write(bb.getValue() + "\n");
                 writer.write(bb.getTasks().size() + "\n");
 
                 for (Task t : bb.getTasks()) {
-                    writer.write(t.getId() + " ");
+                    writer.write(t.getValue() + " "); // apenas value
                 }
 
                 writer.write("\n\n");
