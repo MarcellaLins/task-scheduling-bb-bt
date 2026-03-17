@@ -14,7 +14,6 @@ public class InputGenerator {
         Random random = new Random();
 
         File directory = new File(FOLDER);
-
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -23,19 +22,16 @@ public class InputGenerator {
 
         try (FileWriter writer = new FileWriter(file)) {
 
-            writer.write(taskSizes.length + "\n"); // número de instâncias
-
             for (int size : taskSizes) {
 
-                writer.write(size + "\n");
+                writer.write(size + "\n"); // número de tarefas da instância
 
-                for (int i = 1; i <= size; i++) {
-
+                for (int i = 0; i < size; i++) {
                     int processingTime = random.nextInt(10) + 1;
                     int deadline = random.nextInt(30) + 5;
                     int value = random.nextInt(100) + 1;
 
-                    writer.write(i + " " + processingTime + " " + deadline + " " + value + "\n");
+                    writer.write(processingTime + " " + deadline + " " + value + "\n");
                 }
 
                 writer.write("\n"); // separa instâncias

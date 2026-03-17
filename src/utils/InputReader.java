@@ -1,54 +1,43 @@
 package utils;
 
+import model.Task;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Task;
 
 public class InputReader {
 
-    private static final String FOLDER = "instances/";
-
     public static List<List<Task>> read(String fileName) {
-
         List<List<Task>> instances = new ArrayList<>();
 
-        String path = FOLDER + fileName;
+        try (BufferedReader br = new BufferedReader(new FileReader("instances/" + fileName))) {
+            String line;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue; // ignora linhas em branco
 
-            int numberOfInstances = Integer.parseInt(reader.readLine());
+                int size = Integer.parseInt(line); // número de tarefas da instância
+                List<Task> tasks = new ArrayList<>();
 
-            for (int k = 0; k < numberOfInstances; k++) {
+                for (int i = 0; i < size; i++) {
+                    line = br.readLine().trim();
+                    String[] parts = line.split("\\s+"); // divide por espaços
 
-            int numberOfTasks = Integer.parseInt(reader.readLine());
+                    int processingTime = Integer.parseInt(parts[0]);
+                    int deadline = Integer.parseInt(parts[1]);
+                    int value = Integer.parseInt(parts[2]);
 
-            List<Task> tasks = new ArrayList<>();
+                    tasks.add(new Task(processingTime, deadline, value));
+                }
 
-            for (int i = 0; i < numberOfTasks; i++) {
-
-                String line = reader.readLine();
-                String[] parts = line.split(" ");
-
-                int id = Integer.parseInt(parts[0]);
-                int processingTime = Integer.parseInt(parts[1]);
-                int deadline = Integer.parseInt(parts[2]);
-                int value = Integer.parseInt(parts[3]);
-
-                Task task = new Task(id, processingTime, deadline, value);
-                tasks.add(task);
+                instances.add(tasks);
             }
 
-            instances.add(tasks);
-
-            reader.readLine(); // pula linha em branco
-        }
-
-
         } catch (IOException e) {
-            System.out.println("Erro ao ler arquivo: " + path);
             e.printStackTrace();
         }
 
