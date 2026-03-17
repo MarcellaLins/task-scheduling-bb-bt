@@ -2,13 +2,11 @@ package model;
 
 public class Task {
 
-    private final int id;
     private final int processingTime;
     private final int deadline;
     private final int value;
 
-    public Task(int id, int processingTime, int deadline, int value) {
-        this.id = id;
+    public Task(int processingTime, int deadline, int value) {
         this.processingTime = processingTime;
         this.deadline = deadline;
         this.value = value;
@@ -17,14 +15,10 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
-                ", processingTime=" + processingTime +
+                "processingTime=" + processingTime +
                 ", deadline=" + deadline +
+                ", value=" + value +
                 '}';
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int getProcessingTime() {
@@ -38,5 +32,4 @@ public class Task {
     public int getValue() {
         return value;
     }
-
 }
