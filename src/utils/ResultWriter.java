@@ -14,7 +14,8 @@ public class ResultWriter {
     public static void write(String fileName,
                              List<Solution> backtrackingSolutions,
                              List<Solution> branchSolutions,
-                             List<Solution> greedySolutions) {
+                             List<Solution> greedySolutions,
+                             List<Solution> dpSolutions) {
 
         File directory = new File(FOLDER);
 
@@ -62,6 +63,18 @@ public class ResultWriter {
 
                 for (Task t : greedy.getTasks()) {
                     writer.write(t.getValue() + " ");
+                }
+
+                writer.write("\n\n");
+
+                // Dynamic Programming
+                Solution dp = dpSolutions.get(i);
+                writer.write("DynamicProgramming\n");
+                writer.write(dp.getValue() + "\n");
+                writer.write(dp.getTasks().size() + "\n");
+
+                for (Task t : dp.getTasks()) {
+                    writer.write(t.getValue() + " "); // apenas value
                 }
 
                 writer.write("\n\n");
