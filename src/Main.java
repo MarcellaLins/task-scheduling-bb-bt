@@ -1,5 +1,6 @@
 import algorithms.Backtracking;
 import algorithms.BranchBound;
+import algorithms.Greedy;
 import java.util.ArrayList;
 import java.util.List;
 import model.Solution;
@@ -23,6 +24,7 @@ public class Main {
 
         List<Solution> backtrackingSolutions = new ArrayList<>();
         List<Solution> branchSolutions = new ArrayList<>();
+        List<Solution> greedySolutions = new ArrayList<>();
 
         for (int i = 0; i < instances.size(); i++) {
             List<Task> tasks = instances.get(i);
@@ -58,8 +60,27 @@ public class Main {
                     i+1, bbResult.getAverageTimeMs(), bbNodes);
 
             branchSolutions.add(bbSolution);
+
+            // Solução Greddy (gulosa)
+            Greedy greedy = new Greedy();
+            Solution greedySolution = greedy.solve(tasks);
+
+            // Greddy com medição de tempo
+            TimerUtils.TimedResult greedyResult = TimerUtils.measureAverage(() -> {
+                Greedy temp = new Greedy();
+                return temp.solve(tasks);
+            }, 15);
+
+            System.out.printf(
+                "Instância %d - Greedy -> Tempo médio: %.3f ms%n",
+                i + 1, greedyResult.getAverageTimeMs()
+            );
+
+            greedySolutions.add(greedySolution);
+
+            System.out.println();
         }
 
-        ResultWriter.write("output.txt", backtrackingSolutions, branchSolutions);
+        ResultWriter.write("output.txt", backtrackingSolutions, branchSolutions, greedySolutions);
     }
 }

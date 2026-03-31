@@ -1,12 +1,11 @@
 package utils;
 
-import model.Solution;
-import model.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import model.Solution;
+import model.Task;
 
 public class ResultWriter {
 
@@ -14,7 +13,8 @@ public class ResultWriter {
 
     public static void write(String fileName,
                              List<Solution> backtrackingSolutions,
-                             List<Solution> branchSolutions) {
+                             List<Solution> branchSolutions,
+                             List<Solution> greedySolutions) {
 
         File directory = new File(FOLDER);
 
@@ -50,6 +50,18 @@ public class ResultWriter {
 
                 for (Task t : bb.getTasks()) {
                     writer.write(t.getValue() + " "); // apenas value
+                }
+
+                writer.write("\n\n");
+
+                // Greedy
+                Solution greedy = greedySolutions.get(i);
+                writer.write("Greedy\n");
+                writer.write(greedy.getValue() + "\n");
+                writer.write(greedy.getTasks().size() + "\n");
+
+                for (Task t : greedy.getTasks()) {
+                    writer.write(t.getValue() + " ");
                 }
 
                 writer.write("\n\n");
